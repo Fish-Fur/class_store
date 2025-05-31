@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative 'lib/back_store/version'
+require_relative 'lib/class_store/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'back_store'
-  spec.version = BackStore::VERSION
+  spec.name = 'class_store'
+  spec.version = ClassStore::VERSION
   spec.authors = ['drewthorp']
   spec.email = ['gems@fishfur.com']
 
-  spec.summary = 'Provides a back store for when writing APIs that need to persist data against a class.'
-  spec.description = 'Provides a back store for when writing APIs that need to persist data against a class.'
-  spec.homepage = 'https://github.com/Fish-Fur/back_store'
+  spec.summary = 'Provides a class store for when writing APIs that need to persist data against a class.'
+  spec.description = 'Provides a class store for when writing APIs that need to persist data against a class.'
+  spec.homepage = 'https://github.com/Fish-Fur/class_store'
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 3.0.0'
 

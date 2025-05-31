@@ -1,24 +1,75 @@
-# BackStore
+# ClassStore
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/back_store`. To experiment with that code, run `bin/console` for an interactive prompt.
+ClassStore provides a simple way to store data in arrays and hashes at a class level. Unlike class variables, changes made on a subclass are not replicated in their base class, and unlike class instance variables the contents of a base class are replicated in it's subclasses.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
 Install the gem and add to the application's Gemfile by executing:
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+    $ bundle add class_store
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+    $ gem install class_store
 
 ## Usage
 
-TODO: Write usage instructions here
+By default the data is stored in a Hash:
+
+```ruby
+class MyClass
+  include ClassStore
+
+  class_store :data
+end
+
+MyClass.data[:foo] = 'bar'
+MyClass.data[:foo] # => 'bar'
+```
+
+Alternatively, the data can be stored in an Array:
+
+```ruby
+class MyArrayStore
+  include ClassStore
+
+  class_store :data, inital_state: []
+end
+
+MyArrayStore.data << 'foo'
+MyArrayStore.data # => ['foo']
+```
+
+Derived classes inherit the data from their base class and can add there own. The data added in the derived class is not replicated in the base class:
+
+```ruby
+class MyClass
+  include ClassStore
+
+  class_store :data
+
+    def self.add_data(key, value)
+      data[key] = value
+    end
+
+    add_data(:foo, 'bar')
+end
+
+class MySubClass < MyClass
+  add_data(:baz, 'qux')
+end
+
+MyClass.data # => {:foo => 'bar'}
+MySubClass.data # => {:foo => 'bar', :baz => 'qux'}
+```
+
+Calls to a stores reset method will reset the data in that class alone. It will not alter the base class of a derived class, and, if called on a base class will not propagate to it's subclasses:
+
+```ruby
+MyClass.reset_data
+MyClass.data # => {}
+MySubClass.data # => {:baz => 'qux'}
+```
 
 ## Development
 
@@ -28,7 +79,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/back_store. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/back_store/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/class_store. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/class_store/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -36,4 +87,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the BackStore project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/back_store/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the ClassStore project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/class_store/blob/main/CODE_OF_CONDUCT.md).

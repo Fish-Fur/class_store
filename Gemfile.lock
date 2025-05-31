@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    back_store (0.1.0)
+    class_store (0.1.0)
       activesupport (~> 7.1.0)
 
 GEM
@@ -76,7 +76,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  back_store!
+  class_store!
   minitest (~> 5.16)
   pry (~> 0.13.1)
   rake (~> 13.0)
