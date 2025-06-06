@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    class_store (0.1.0)
-      activesupport (~> 7.1.0)
+    class_store (0.2.0)
+      activesupport (>= 7.1.0)
 
 GEM
   remote: https://rubygems.org/
