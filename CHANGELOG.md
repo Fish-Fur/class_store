@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+- Convert test suite to RSpec
+
 ## [0.2.0] - 2025-04-02
 
 - Allow active support for 7.1 and above
