@@ -33,7 +33,7 @@ Alternatively, the data can be stored in an Array:
 class MyArrayStore
   include ClassStore
 
-  class_store :data, inital_state: []
+  class_store :data, initial_state: []
 end
 
 MyArrayStore.data << 'foo'

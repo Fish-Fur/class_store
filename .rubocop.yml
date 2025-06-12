@@ -1,3 +1,7 @@
+plugins:
+  - rubocop-rake
+  - rubocop-rspec
+
 AllCops:
   TargetRubyVersion: 3.0
   SuggestExtensions: false
@@ -13,12 +17,18 @@ Metrics/BlockLength:
 
 Metrics/AbcSize:
   Exclude:
+    - "spec/**/*"
     - "test/**/*"
 
 Metrics/CyclomaticComplexity:
   Exclude:
+    - "spec/**/*"
     - "test/**/*"
 
 Metrics/MethodLength:
   Exclude:
+    - "spec/**/*"
     - "test/**/*"
+
+RSpec/MultipleExpectations:
+  Max: 2

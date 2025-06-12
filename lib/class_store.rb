@@ -65,13 +65,13 @@ module ClassStore
           raise DuplicateClassStoreError, "Class store #{name} has already been registered"
         end
 
-        inital_state = options.delete(:initial_state) || {}
-        unless inital_state.is_a?(Hash) || inital_state.is_a?(Array)
+        initial_state = options.delete(:initial_state) || {}
+        unless initial_state.is_a?(Hash) || initial_state.is_a?(Array)
           raise IllegalStoreTyoeError, 'initial_state must be a hash or array'
         end
 
-        _registered_class_stores[name] = { initial_state: inital_state, options: options }
-        _create_class_store(name, inital_state, options)
+        _registered_class_stores[name] = { initial_state: initial_state, options: options }
+        _create_class_store(name, initial_state, options)
       end
 
       def inherited(subclass)
